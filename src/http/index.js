@@ -24,6 +24,12 @@ function HttpApi (repo, config, cliArgs) {
   this.node = undefined
   this.server = undefined
 
+  if (typeof repo === 'object') {
+    // repo is actually a full IPFS node instance.
+    this.node = repo
+    repo = this.node.repo.path()
+  }
+
   this.log = debug('jsipfs:http-api')
   this.log.error = debug('jsipfs:http-api:error')
 
@@ -46,6 +52,17 @@ function HttpApi (repo, config, cliArgs) {
     series([
       (cb) => {
         cb = once(cb)
+
+        // check if node is already available.
+        if (this.node && this.node !== undefined) {
+          this.node.once('error', (err) => {
+            this.log('error starting core', err)
+            err.code = 'ENOENT'
+            cb(err)
+          })
+
+          return cb(null)
+        }
 
         const libp2p = { modules: {} }
 
