@@ -36,12 +36,15 @@ module.exports = (self) => {
       (cb) => self.preStart(cb),
       (cb) => self.libp2p.start(cb)
     ], (err) => {
-      if (err) { return done(err) }
+      if (err) {
+        return done(err)
+      }
+      console.log('bitswap options: ', self._options.bitswap)
 
       self._bitswap = new Bitswap(
         self._libp2pNode,
         self._repo.blocks,
-        { statsEnabled: true }
+        self._options.bitswap
       )
 
       self._bitswap.start()
