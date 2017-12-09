@@ -108,7 +108,7 @@
     "hoek": "^5.0.3",
     "human-to-milliseconds": "^1.0.0",
     "ipfs-api": "^18.2.1",
-    "ipfs-bitswap": "~0.19.0",
+    "ipfs-bitswap": "github:ya7ya/js-ipfs-bitswap#paratii/v0.19.0-b",
     "ipfs-block": "~0.6.1",
     "ipfs-block-service": "~0.13.0",
     "ipfs-multipart": "~0.1.0",
