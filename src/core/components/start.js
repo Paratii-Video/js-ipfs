@@ -39,7 +39,7 @@ module.exports = (self) => {
       if (err) {
         return done(err)
       }
-      console.log('bitswap options: ', self._options.bitswap)
+      // console.log('bitswap options: ', self._options.bitswap)
 
       self._bitswap = new Bitswap(
         self._libp2pNode,
